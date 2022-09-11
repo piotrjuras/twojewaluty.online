@@ -1,0 +1,1 @@
+This is a webapp developed in REACT. Main function is to simluate and analyze rates exchanges. Currency rates are fetched from NBP API. to run app type 'npm install' and 'npm start'

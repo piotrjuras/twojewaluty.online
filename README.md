@@ -1,1 +1,1 @@
-This is a webapp developed in REACT. Main function is to simluate and analyze rates exchanges. Currency rates are fetched from NBP API. to run app you need to: 1. change '.env_example' filename to '.env' 2.'npm install' 3.'npm start'
+This is a webapp developed in REACT in node v14.15.1. Main function is to simluate and analyze rates exchanges. Currency rates are fetched from NBP API. to run app you need to: 1. change '.env_example' filename to '.env' 2.'npm install' 3.'npm start'

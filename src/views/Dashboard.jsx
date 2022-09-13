@@ -38,9 +38,9 @@ const Dashboard = ({ reload }) => {
         if(e.realIndex !== userData.mainAccount){
             swiperRef.current.swiper.allowTouchMove = false;
             userData.mainAccount = e.realIndex;
-            setUserData(userData);
             const response = await UserService.updateUser(params.token, userData);
             if(response.data === 'updated'){
+                setUserData(userData);
                 setAlert(`zmiana konta na: ${userData.subAccounts[userData.mainAccount].currency.code}`);
                 setActiveSubAccount(userData.mainAccount);
             } else {

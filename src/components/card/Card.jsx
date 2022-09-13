@@ -45,6 +45,7 @@ const Card = ({ data }) => {
                 <h1><span>{currency.code}</span> {balance.toFixed(2)}</h1>
                 <h3>Zysk:</h3>
                 <h2>{calculateProfit(getSpread(currencyData.rates[0].mid, spread, 'sell'))} <span>PLN</span></h2>
+                {currencyData.rates[0].effectiveDate === 'domyślna wartość' ? <p>brak aktualnego kursu</p> : null}
             </div>
             : 
             <Loader color={'white'} />}
@@ -94,8 +95,9 @@ const CreditCard = styled.div`
     }
     p{
         position: absolute;
-        right: 20px;
-        top: 10px;
+        right: -55px;
+        top: 90px;
+        transform: rotate(90deg);
     }
 
     .loader{

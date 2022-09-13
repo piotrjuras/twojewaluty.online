@@ -21,7 +21,7 @@ const Currency = ({ code, mainCurrency, spread, editMode }) => {
 
     const customCurrencyRateData = {
         mid: customCurrencyRate,
-        effectiveDate: 'brak, wartość zdefiniowana'
+        effectiveDate: 'brak, wartość predefiniowana'
     }
 
     useEffect(() => {

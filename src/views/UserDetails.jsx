@@ -18,8 +18,7 @@ const UserDetails = ({ reload }) => {
     const navigate = useNavigate();
     const params = useParams();
     const [userData, setUserData] = useContext(UserContext);
-    const currentSubAccount = userData?.subAccounts[userData.mainAccount].currency
-    const [reversedHistory, setReversedHistory] = useState(null)
+    const currentSubAccount = userData?.subAccounts[userData.mainAccount];
     const [modal, setModal] = useState(null);
     const [success, setSuccess] = useState(false);
 
@@ -43,11 +42,7 @@ const UserDetails = ({ reload }) => {
     },[params, reload]); // eslint-disable-line
 
     useEffect(() => {
-        if(userData){
-            setReversedHistory(userData.subAccounts[userData.mainAccount].history.reverse());
-        } else {
-            fetchUser(params.token);
-        }
+        if(!userData) fetchUser(params.token);
     },[userData]); // eslint-disable-line
 
     return(
@@ -59,7 +54,7 @@ const UserDetails = ({ reload }) => {
                 </Link>
                 <h1>Konto, {userData.name}</h1>
             </header>
-            <p>Domyślne subkonto: <b>{currentSubAccount.name} ({currentSubAccount.code})</b></p>
+            <p>Domyślne subkonto: <b>{currentSubAccount.currency.name} ({currentSubAccount.currency.code})</b></p>
             <main>
                 <h2>Informacje</h2>
                 <LinkButton center XL onClick={() => setModal('history')}>Historia transakcji <StyledArrow/></LinkButton>
@@ -77,7 +72,7 @@ const UserDetails = ({ reload }) => {
 
             { modal === 'history' ? 
                 <Modal closeModal={() => setModal(null)} backButton>
-                    <History history={reversedHistory} data={userData} />
+                    <History history={currentSubAccount.history} data={userData} />
                 </Modal>
             : null }
 

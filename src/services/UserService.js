@@ -7,12 +7,7 @@ export default class UserService{
     static async getUser(token){
         try{
             const res = await axios.get(`${env.getEndpoint}/${token}.json?ts=${Math.random()}`, headers);
-            try{
-                res.data = JSON.parse(decrypt(res.data));
-            }
-            catch(error){
-                return 'Ups :( Coś poszło nie tak z szyfrowaniem Twoich danych';
-            }
+            res.data = JSON.parse(decrypt(res.data));
             return res;
         }
         catch(error){

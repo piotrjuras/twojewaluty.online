@@ -58,7 +58,8 @@ const StyledModal = styled.section`
         padding: 20px;
 
         h1,h2{
-            margin: 10px 25px 10px 0;
+            margin: 10px 0;
+            max-width: 80vw;
             font-size: 25px;
         }
         h3{

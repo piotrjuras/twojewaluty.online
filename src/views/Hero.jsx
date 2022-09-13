@@ -57,7 +57,7 @@ const HeroWrapper = styled.div`
         object-size: contain;
         object-position: center;
         max-width: 250px;
-        margin-top: 50px;
+        margin-top: 20px;
     }
     section{
         p{

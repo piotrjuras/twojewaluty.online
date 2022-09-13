@@ -17,7 +17,13 @@ const History = ({ history, data }) => {
     return(
         <StyledHistoryView>
             <h1>Historia transakcji</h1>
-            <StyledButton center onClick={() => setSortByNewwest(!sortbyNewwest)}>{sortbyNewwest ? 'Sortuj od najstarszych' : 'Sortuj od najnowszych'}</StyledButton>
+            {historyList.length ?
+                <StyledButton
+                    center
+                    onClick={() => setSortByNewwest(!sortbyNewwest)}
+                >
+                    {sortbyNewwest ? 'Sortuj od najstarszych' : 'Sortuj od najnowszych'}
+                </StyledButton> : <h3>brak transakcji</h3>}
             {historyList.map((item, index) => {
                 return <span key={index}>
                             <h4>{item.date}</h4>

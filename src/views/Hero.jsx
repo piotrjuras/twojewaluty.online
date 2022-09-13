@@ -37,7 +37,7 @@ const Hero = () => {
                 sessionStorage.setItem('cookie', false);
                 }}>
                     <h2>Szanujemy Twoją prywatność</h2>
-                    <p>Ta aplikacja nie wykorzystuje ciasteczek. Nie badamy Twojej aktywności, nie analizujemy tego kiedy i z jakiego urządzenia się logowałeś. Cieszymy się, ze jestes naszym użytkownikiem i <b>nie inwigilujemy Cię</b> na możliwym każdym kroku. Obiecujemy!</p>
+                    <p>Ta aplikacja nie wykorzystuje ciasteczek. Nie w ten sposób Twojej aktywności. <b>Wszystkie Twoje dane są w szyfrowane w sposób end-to-end</b> to znaczy, że nawet my nie możemy ich odczytać.</p>
                 </Modal> : null}
         </HeroWrapper>
     )

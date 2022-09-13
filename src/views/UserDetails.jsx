@@ -27,8 +27,11 @@ const UserDetails = ({ reload }) => {
 
     const fetchUser = async (token) => {
         const response = await UserService.getUser(token);
-        console.log(response.data);
-        setUserData(response.data);
+        if(response.data){
+            setUserData(response.data);
+        } else {
+            navigate(`/user/${params.token}/`);
+        }
     }
 
     useEffect(() => {
@@ -119,6 +122,7 @@ const UserDetails = ({ reload }) => {
                     <Settings userData={userDataCopied} handleSuccess={() => navigate(`/user/${params.token}/account/reload`)} />
                 </Modal>
             : null }
+            <p>Kontakt: <br/>admin@twojewaluty.online</p>
         </StyledScreenContainer> : <Loader fullscreen={true} />
     )
 }

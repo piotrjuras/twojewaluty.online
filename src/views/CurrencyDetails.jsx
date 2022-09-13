@@ -6,7 +6,6 @@ import Chart from '../components/chart/Chart';
 import CurrencyCalculator from '../components/currency/CurrencyCalculator';
 import { Link, useParams } from 'react-router-dom';
 import { OptionButton, StyledArrow, StyledButton } from '../styled/StyledButton';
-import { FormInput } from '../styled/StyledInput';
 import { StyledScreenContainer } from '../styled/StyledScreenContainer';
 import { getTimeInPast, textToClipboard } from '../helpers/helper';
 import { AlertContext } from '../Root';
@@ -90,11 +89,6 @@ const CurrencyDetails = ({ themeMode }) => {
                 <main>
                 <h2>Kurs z dnia: <b>{currency.rates[currency.rates.length-1].effectiveDate}</b></h2>
                 <CurrencyCalculator data={currency} />
-                <FormInput 
-                    style={{display: 'none'}} 
-                    className='copyInput' 
-                    value={`${window.location.host}/details/${params.code}/${params.history}`}
-                />
                 <StyledButton center
                     onClick={() => {
                         try{

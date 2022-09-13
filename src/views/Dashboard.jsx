@@ -27,11 +27,10 @@ const Dashboard = ({ reload }) => {
 
     const fetchUser = async (token) => {
         const response = await UserService.getUser(token);
-        console.log(response.data);
-        if(typeof response.data === 'object'){
+        if(response.data){
             setUserData(response.data);
         } else {
-            setError('Nie ma takiego uzytkownika');
+            setError(response);
         }
     }
 

@@ -1,6 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import UserService from '../../services/UserService';
+import axios from 'axios';
+import { env } from '../../helpers/enviroment';
 import { FormInput } from '../../styled/StyledInput';
 import { StyledButton } from '../../styled/StyledButton';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +14,7 @@ const Settings = ({ userData, handleSuccess }) => {
     const [loading, setLoading] = useState(false);
     const [deleteConfirmed, setDeleteConfirmed] = useState(false);
     const [alert, setAlert] = useContext(AlertContext); // eslint-disable-line
+    const [rawData, setRawData] = useState(null);
 
     const save = async (e) => {
         e.preventDefault();
@@ -40,6 +43,15 @@ const Settings = ({ userData, handleSuccess }) => {
         }
     }
 
+    useEffect(() => {
+        const fetchRawData = async () => {
+            const raw = await axios.get(`${env.getEndpoint}/${userData.userToken}.json?ts=${Math.random()}`)
+            setRawData(raw.data);
+        }
+
+        fetchRawData()
+    },[userData.userToken])
+
     return(
         <StyledForm>
             <h1>Ustawienia konta</h1>
@@ -48,9 +60,9 @@ const Settings = ({ userData, handleSuccess }) => {
                 <FormInput name='name' placeholder={userData.name} onChange={(e) => handleInput(e.currentTarget.value, 'name')} />
                 <label htmlFor='name'>email</label>
                 <FormInput name='name' placeholder={userData.email} onChange={(e) => handleInput(e.currentTarget.value, 'email')} />
-                <label htmlFor='name'>token</label>
-                <FormInput name='name' placeholder={userData.userToken} disabled/>
             </div>
+            <h3>Twoje dane są zaszyfrowane w taki sposób, że nawet nie jesteśmy w stanie ich odszyfrować. Nie wierzysz nam? Zobacz sam w jak wygląda ich część:</h3>
+            <p>{rawData}</p>
             <StyledButton center XL onClick={(e) => save(e)} disabled={loading}>{loading ? 'Przetwarzam...' : 'Zapisz'}</StyledButton>
             {deleteConfirmed ? <h5>Potwierdź usunięcie konta!</h5> : null}
             <StyledButton center className='delete' onClick={(e) => deleteAccount(e, userData.userToken)}>{deleteConfirmed ? 'Potwierdzam' : 'Usuń Konto'}</StyledButton>
@@ -78,6 +90,13 @@ export const StyledForm = styled.form`
         color: red;
         text-align: center;
         font-size: 20px;
+    }
+
+    p{
+        line-break: anywhere;
+        color: red;
+        max-height: 150px;
+        overflow: auto;
     }
 
     button.delete{

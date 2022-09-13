@@ -34,7 +34,7 @@
             echo 'created';
             $to      = $email;
             $subject = 'Witamy w twojewaluty.online';
-            $message = 'Unikalny token wielokrotnego uzytku do Twojego konta: ' . $token;
+            $message = 'Unikalny token wielokrotnego użytku do Twojego konta: ' . $token . 'Możesz też przejść do swojego konta od razu klikając w link: https://twojewaluty.online/user/' . $token;
             $headers = 'From: noreply@twojewaluty.online' . "\r\n" .
                 'Reply-To: noreply@twojewaluty.online' . "\r\n" .
                 'X-Mailer: PHP/' . phpversion();

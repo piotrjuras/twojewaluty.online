@@ -1,7 +1,7 @@
-import { generateId } from "./helper";
+import { generateUUID } from "./helper";
 
 export const formModel = {
-    userToken: generateId(10),
+    userToken: generateUUID(),
     email: null,
     name: null,
     favorites: [],

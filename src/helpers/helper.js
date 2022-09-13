@@ -1,13 +1,15 @@
 import dayjs from 'dayjs';
+import * as CryptoJS from 'crypto-js';
+import { v1 as uuidv1 } from 'uuid';
 
-export const generateId = (length) => {
-    let result = '';
-    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let charactersLength = characters.length;
-    for ( let i = 0; i < length; i++ ){
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-   return result;
+export const generateUUID = () => {
+    const v1options = {
+        node: [0x01, 0x23, 0x45, 0x67, 0x89, 0xab],
+        clockseq: 0x1234,
+        msecs: new Date().getTime(),
+        nsecs: 5678,
+      };
+   return uuidv1(v1options);
 };
 
 export const getSpread = (rate, spread, operation) => {
@@ -91,4 +93,12 @@ export const textToClipboard = (text) => {
     dummy.select();
     document.execCommand("copy");
     document.body.removeChild(dummy);
+}
+
+export const encrypt = (string) => {
+    return CryptoJS.AES.encrypt(string, process.env.REACT_APP_ENCRYPT);
+}
+
+export const decrypt = (encrypted) => {
+    return CryptoJS.AES.decrypt(encrypted, process.env.REACT_APP_ENCRYPT).toString(CryptoJS.enc.Utf8);
 }

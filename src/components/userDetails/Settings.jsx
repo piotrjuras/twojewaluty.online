@@ -61,11 +61,11 @@ const Settings = ({ userData, handleSuccess }) => {
                 <label htmlFor='name'>email</label>
                 <FormInput name='name' placeholder={userData.email} onChange={(e) => handleInput(e.currentTarget.value, 'email')} />
             </div>
-            <h3>Twoje dane są zaszyfrowane w taki sposób, że nawet nie jesteśmy w stanie ich odszyfrować. Nie wierzysz nam? Zobacz sam w jak wygląda ich część:</h3>
+            <h3>Twoje dane są zaszyfrowane w taki sposób, że nawet nie jesteśmy w stanie ich odszyfrować. Nie wierzysz nam? Zobacz sam jak wygląda ich część:</h3>
             <p>{rawData}</p>
-            <StyledButton center XL onClick={(e) => save(e)} disabled={loading}>{loading ? 'Przetwarzam...' : 'Zapisz'}</StyledButton>
             {deleteConfirmed ? <h5>Potwierdź usunięcie konta!</h5> : null}
             <StyledButton center className='delete' onClick={(e) => deleteAccount(e, userData.userToken)}>{deleteConfirmed ? 'Potwierdzam' : 'Usuń Konto'}</StyledButton>
+            <StyledButton center XL onClick={(e) => save(e)} disabled={loading}>{loading ? 'Przetwarzam...' : 'Zapisz'}</StyledButton>
         </StyledForm>
     )
 
@@ -95,7 +95,7 @@ export const StyledForm = styled.form`
     p{
         line-break: anywhere;
         color: red;
-        max-height: 150px;
+        max-height: 20px;
         overflow: auto;
     }
 
@@ -104,6 +104,5 @@ export const StyledForm = styled.form`
         margin-top: 20px;
     }
 `
-
 
 export default Settings;

@@ -69,6 +69,7 @@ export const StyledArrow = styled.button`
 
     ${props => props.back ? 'transform: rotate(180deg)' : ''}
     ${props => props.down ? 'transform: rotate(90deg)' : ''}
+    ${props => props.up ? 'transform: rotate(-90deg)' : ''}
 
 `
 

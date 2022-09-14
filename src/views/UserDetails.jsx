@@ -4,7 +4,6 @@ import Modal from '../components/common/Modal';
 import Statistics from '../components/userDetails/Statistics';
 import Settings from '../components/userDetails/Settings';
 import AddSubAccount from '../components/userDetails/AddSubAccount';
-import DeleteSubAccount from '../components/userDetails/DeleteSubAccount';
 import UserService from '../services/UserService';
 import EditSubAccounts from '../components/userDetails/EditSubAccounts';
 import Loader from '../components/Loader';
@@ -60,8 +59,6 @@ const UserDetails = ({ reload }) => {
                 <LinkButton center XL onClick={() => setModal('history')}>Historia transakcji <StyledArrow/></LinkButton>
                 <LinkButton center XL onClick={() => setModal('statistics')}>Statystyki<StyledArrow/></LinkButton>
                 <h2>Zarządzanie kontem</h2>
-                <LinkButton center XL onClick={() => setModal('addSubAccount')}>Dodaj subkonto<StyledArrow/></LinkButton>
-                <LinkButton center XL onClick={() => setModal('deleteSubAccount')}>Usuń subkonto<StyledArrow/></LinkButton>
                 <LinkButton center XL onClick={() => setModal('editSubAccounts')}>Edytuj subkonta<StyledArrow/></LinkButton>
                 <LinkButton center XL onClick={() => setModal('settings')}>Ustawienia konta<StyledArrow/></LinkButton>
                 <LinkButton center XL onClick={() => {
@@ -71,13 +68,13 @@ const UserDetails = ({ reload }) => {
             </main>
 
             { modal === 'history' ? 
-                <Modal closeModal={() => setModal(null)} backButton>
+                <Modal closeModal={() => setModal(null)} >
                     <History history={currentSubAccount.history} data={userData} />
                 </Modal>
             : null }
 
             { modal === 'statistics' ? 
-                <Modal closeModal={() => setModal(null)} backButton>
+                <Modal closeModal={() => setModal(null)} >
                     <Statistics data={userData} />
                 </Modal>
             : null }
@@ -91,21 +88,16 @@ const UserDetails = ({ reload }) => {
                 </Modal>
             : null }
 
-            { modal === 'deleteSubAccount' ? 
-                <Modal closeModal={() => {
-                    setModal(null);
-                    setSuccess(false);
-                }} initCloseModal={success} backButton>
-                    <DeleteSubAccount userData={userDataCopied} handleSuccess={() => navigate(`/user/${params.token}/account/reload`)} />
-                </Modal>
-            : null }
-
             { modal === 'editSubAccounts' ?
                 <Modal closeModal={() => {
                     setModal(null);
                     setSuccess(false);
-                }} initCloseModal={success} backButton>
-                    <EditSubAccounts userData={userDataCopied} handleSuccess={() => navigate(`/user/${params.token}/account/reload`)} />
+                }} initCloseModal={success} >
+                    <EditSubAccounts
+                        userData={userDataCopied}
+                        handleSuccess={() => navigate(`/user/${params.token}/account/reload`)}
+                        addSubaccount={() => setModal('addSubAccount')}
+                    />
                 </Modal>
             : null }
 

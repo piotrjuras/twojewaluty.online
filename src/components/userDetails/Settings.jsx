@@ -101,7 +101,7 @@ export const StyledForm = styled.form`
 
     button.delete{
         background-color: red;
-        margin-top: 20px;
+        margin-bottom: 20px;
     }
 `
 

@@ -10,7 +10,7 @@ import { StyledScreenContainer } from '../styled/StyledScreenContainer';
 import { getTimeInPast, textToClipboard } from '../helpers/helper';
 import { AlertContext } from '../Root';
 
-const CurrencyDetails = () => {
+const CurrencyDetails = ({ reloaded }) => {
 
     const params = useParams();
     const navigate = useNavigate();
@@ -49,7 +49,7 @@ const CurrencyDetails = () => {
     
     return(
         currency ? <StyledScreenContainer className={animateIn ? 
-            params.token ? 'animate-in' : null
+            params.token && !reloaded ? 'animate-in' : null
             :
             params.token ? 'animate-out' : null
         }>

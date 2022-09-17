@@ -86,10 +86,10 @@ const Currency = ({ code, mainCurrency, spread, editMode }) => {
                 {mainCurrency ? 
                     <div className="buttons">
                         <StyledButton primary onClick={() => setModal('sell')}>
-                            Sprzedaj <span>{getSpread(currency.todaysRate.mid, spread, 'sell')}</span>
+                            Sprzedaj<br/> <span>{getSpread(currency.todaysRate.mid, spread, 'sell')}</span>
                         </StyledButton>
                         <StyledButton onClick={() => setModal('buy')}>
-                            Kup <span>{getSpread(currency.todaysRate.mid, spread, 'buy')}</span>
+                            Kup<br/> <span>{getSpread(currency.todaysRate.mid, spread, 'buy')}</span>
                         </StyledButton>
                         { modal ?
                             <Operation
@@ -109,7 +109,7 @@ const Currency = ({ code, mainCurrency, spread, editMode }) => {
 
 const CurrencyWrapper = styled.div`
     border-radius: 25px;
-    padding: 15px 25px;
+    padding: 15px 20px;
     position: relative;
     margin-bottom: 20px;
     box-shadow: var(--link-box-shadow);

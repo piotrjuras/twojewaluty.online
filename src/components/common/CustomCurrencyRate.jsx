@@ -19,20 +19,22 @@ const CustomCurrencyRate = ({ subAccount }) => {
     return (
         <StyledCustomCurrencyValue>
             <h3>Pobieraj kurs: {useNBP ? 'NBP' : 'własny kurs'}</h3>
-            {!useNBP ?
+            {!useNBP ? <>
+                <label htmlFor="name">kurs w PLN</label>
                 <FormInput type="number" placeholder={subAccount.customCurrencyRate ? subAccount.customCurrencyRate.toFixed(4) : '4.5367'} onChange={(e) => setCustomCurrencyValue(e.currentTarget.value)} />
+            </>
             :
                 null
             }
             <div>
-                <StyledButton center onClick={() => setUseNBP(!useNBP)}>{!useNBP ? 'ustaw kurs z NBP' :'ustaw własny kurs'}</StyledButton>
+                <StyledButton center onClick={() => setUseNBP(!useNBP)}>{!useNBP ? 'Ustaw kurs z NBP' :'Ustaw własny kurs'}</StyledButton>
             </div>
         </StyledCustomCurrencyValue>
     )
 }
 
 const StyledCustomCurrencyValue = styled.div`
-    margin-bottom: 30px;
+    margin: 30px 0;
     p{
         margin: 0;
     }

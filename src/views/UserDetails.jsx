@@ -12,7 +12,7 @@ import { UserContext } from '../Root';
 import { StyledScreenContainer } from '../styled/StyledScreenContainer';
 import { LinkButton, StyledArrow } from '../styled/StyledButton';
 
-const UserDetails = ({ reload }) => {
+const UserDetails = () => {
 
     const navigate = useNavigate();
     const params = useParams();
@@ -20,6 +20,7 @@ const UserDetails = ({ reload }) => {
     const currentSubAccount = userData?.subAccounts[userData.mainAccount];
     const [modal, setModal] = useState(null);
     const [success, setSuccess] = useState(false);
+    const [animateIn, setAnimateIn] = useState(true);
 
     const userDataCopied = JSON.parse(JSON.stringify(userData));
 
@@ -27,28 +28,25 @@ const UserDetails = ({ reload }) => {
         const response = await UserService.getUser(token);
         if(response.data){
             setUserData(response.data);
+            setSuccess(true);
         } else {
             navigate(`/user/${params.token}/`);
         }
     }
 
     useEffect(() => {
-        if(reload){
-            fetchUser(params.token);
-            navigate(`/user/${params.token}/account`);
-            setSuccess(true);
-        }
-    },[params, reload]); // eslint-disable-line
-
-    useEffect(() => {
-        if(!userData) fetchUser(params.token);
+        if(!userData) navigate(`/user/${params.token}/`);
     },[userData]); // eslint-disable-line
 
     return(
         userData ? 
-        <StyledScreenContainer>
+        <StyledScreenContainer className={animateIn ? 'animate-in' : 'animate-out'}>
             <header>
-                <Link to={`/user/${params.token}`}>
+                <Link to={`/user/${params.token}`} onClick={(e) => {
+                    e.preventDefault();
+                    setAnimateIn(false);
+                    setTimeout(() => navigate(`/user/${params.token}`), 300);
+                }}>
                     <StyledArrow back />
                 </Link>
                 <h1>Konto, {userData.name}</h1>
@@ -84,7 +82,7 @@ const UserDetails = ({ reload }) => {
                     setModal(null);
                     setSuccess(false);
                 }} initCloseModal={success}>
-                    <AddSubAccount userData={userDataCopied} handleSuccess={() => navigate(`/user/${params.token}/account/reload`)} />
+                    <AddSubAccount userData={userDataCopied} handleSuccess={() => fetchUser(params.token)} />
                 </Modal>
             : null }
 
@@ -95,7 +93,7 @@ const UserDetails = ({ reload }) => {
                 }} initCloseModal={success} >
                     <EditSubAccounts
                         userData={userDataCopied}
-                        handleSuccess={() => navigate(`/user/${params.token}/account/reload`)}
+                        handleSuccess={() => fetchUser(params.token)}
                         addSubaccount={() => setModal('addSubAccount')}
                     />
                 </Modal>
@@ -106,7 +104,7 @@ const UserDetails = ({ reload }) => {
                     setModal(null);
                     setSuccess(false);
                 }} initCloseModal={success} >
-                    <Settings userData={userDataCopied} handleSuccess={() => navigate(`/user/${params.token}/account/reload`)} />
+                    <Settings userData={userDataCopied} handleSuccess={() => fetchUser(params.token)} />
                 </Modal>
             : null }
             <p>Kontakt: <br/>admin@twojewaluty.online</p>

@@ -139,7 +139,8 @@ const CurrencyWrapper = styled.div`
 
     .buttons{
         margin-top: 10px;
-        justify-content: space-evenly;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
 
         button{
             margin: 0 5px;

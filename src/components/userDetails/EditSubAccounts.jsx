@@ -76,11 +76,6 @@ const EditSubAccounts = ({ userData, handleSuccess, addSubaccount }) => {
                         />
                         <CustomCurrencyRate subAccount={subAccount} />
                         <ColorPicker subAccount={subAccount} />
-                        <StyledButton
-                            className="save"
-                            center
-                            onClick={(e) => save(e)} disabled={loading}
-                        >{loading ? 'Przetwarzam...' : 'Zapisz nowe ustawienia'}</StyledButton>
                     </div>
                     {edit ?
                         <StyledDelete 
@@ -89,7 +84,12 @@ const EditSubAccounts = ({ userData, handleSuccess, addSubaccount }) => {
                     : null}
                 </div>
             })}
-            <StyledButton className="add-btn" center XL onClick={() => addSubaccount()}>Dodaj subkonto</StyledButton>
+            <StyledButton className="add-btn" primary center XL onClick={() => addSubaccount()}>Dodaj subkonto</StyledButton>
+            <StyledButton
+                className="save"
+                center
+                onClick={(e) => save(e)} disabled={loading}
+            >{loading ? 'Przetwarzam...' : 'Zapisz nowe ustawienia'}</StyledButton>
         </StyledEditSubAccounts>
     )
 
@@ -119,7 +119,7 @@ const StyledEditSubAccounts = styled.div`
         padding: 15px 20px;
         border-radius: 20px;
         margin: 10px 0;
-        transition: transform .3s ease-in-out;
+        transition: transform .5s ease-in-out;
         &.edit{
             transform: translateX(-60px);
         }
@@ -133,7 +133,7 @@ const StyledEditSubAccounts = styled.div`
         div.collapse-section{
             max-height: 900px;
             overflow: hidden;
-            transition: max-height .3s ease-in-out;
+            transition: max-height .4s ease-in-out;
             &.collapsed{
                 max-height: 0;
             }
@@ -143,13 +143,9 @@ const StyledEditSubAccounts = styled.div`
             font-weight: bold;
             margin: 10px 0;
         }
-
-        button.save{
-            margin-top: 20px;
-        }
     }
     button.add-btn{
-        margin-top: 30px;
+        margin: 20px auto;
     }
 `
 

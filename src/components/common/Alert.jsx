@@ -62,7 +62,7 @@ const StyledAlert = styled.div`
         box-shadow: var(--red-shadow);
     }
 
-    animation: appear .5s ease-in-out forwards;
+    animation: appear .4s ease-in-out forwards;
     @keyframes appear {
         0%{
             transform: translate(-50%, -300px);
@@ -76,7 +76,7 @@ const StyledAlert = styled.div`
     }
 
     &.animate{
-        animation: disappear .5s ease-in-out forwards;
+        animation: disappear .4s ease-in-out forwards;
     }
     @keyframes disappear {
         0%{

@@ -11,4 +11,30 @@ export const StyledScreenContainer = styled.div`
         display: flex;
         align-items: center;
     }
+
+    &.animate-in{
+        animation: slidein .35s ease-in-out;
+    }
+
+    &.animate-out{
+        animation: slideout .35s ease-in-out;
+    }
+
+    @keyframes slideout{
+        from{
+            transform: translateX(0);
+        }
+        to{
+            transform: translateX(100vw);
+        }
+    }
+
+    @keyframes slidein{
+        from{
+            transform: translateX(100vw);
+        }
+        to{
+            transform: translateX(0);
+        }
+    }
 `

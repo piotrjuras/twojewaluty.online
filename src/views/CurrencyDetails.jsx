@@ -4,19 +4,21 @@ import CurrencyService from '../services/CurrencyService';
 import styled from 'styled-components';
 import Chart from '../components/chart/Chart';
 import CurrencyCalculator from '../components/currency/CurrencyCalculator';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { OptionButton, StyledArrow, StyledButton } from '../styled/StyledButton';
 import { StyledScreenContainer } from '../styled/StyledScreenContainer';
 import { getTimeInPast, textToClipboard } from '../helpers/helper';
 import { AlertContext } from '../Root';
 
-const CurrencyDetails = ({ themeMode }) => {
+const CurrencyDetails = () => {
 
     const params = useParams();
+    const navigate = useNavigate();
     const userToken = params.token ? params.token : null;
     const [currency, setCurrency] = useState(null);
     const [chartData, setChartData] = useState([]);
     const [alert, setAlert] = useContext(AlertContext); // eslint-disable-line
+    const [animateIn, setAnimateIn] = useState(params.token ? true : false);
 
     useEffect(() => {
         const fetchCurrency = async (code, startDate, endDate) => {
@@ -46,9 +48,17 @@ const CurrencyDetails = ({ themeMode }) => {
     }
     
     return(
-        currency ? <StyledScreenContainer>
+        currency ? <StyledScreenContainer className={animateIn ? 
+            params.token ? 'animate-in' : null
+            :
+            params.token ? 'animate-out' : null
+        }>
             <header>
-                {userToken ? <Link to={`/user/${userToken}`}>
+                {userToken ? <Link to={`/user/${userToken}`} onClick={(e) => {
+                    e.preventDefault();
+                    setAnimateIn(false);
+                    setTimeout(() => navigate(`/user/${params.token}`), 300);
+                }}>
                     <StyledArrow back />
                 </Link> : null}
                 <h1>{ currency.currency } <span>({currency.code})</span></h1>

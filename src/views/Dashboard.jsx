@@ -15,7 +15,7 @@ import Loader from '../components/Loader';
 import "swiper/css";
 import 'swiper/css/pagination';
 
-const Dashboard = ({ reload }) => {
+const Dashboard = ({ reload, children }) => {
 
     const params = useParams();
     const navigate = useNavigate();

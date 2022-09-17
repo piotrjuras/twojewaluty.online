@@ -70,11 +70,15 @@ export const generateRandomColor = () => {
 export const setThemeMode = (theme) => {
     if(theme === null){
         const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
-        if (darkThemeMq.matches) {
-            document.documentElement.className = 'dark';
-        } else {
-            document.documentElement.className = 'light';
+        const switchTheme = () => {
+            if (darkThemeMq.matches) {
+                document.documentElement.className = 'dark';
+            } else {
+                document.documentElement.className = 'light';
+            }
         }
+        darkThemeMq.addEventListener('change', () => switchTheme());
+        switchTheme();
     } else {
         document.documentElement.className = theme;
         

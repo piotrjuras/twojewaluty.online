@@ -35,12 +35,9 @@ const Root = () => {
                         <Route path={"/"} element={ <Hero /> } />
                         <Route path={"/user/:token"} element={ <Dashboard /> } />
                         <Route path={"/user/:token/reload"} element={ <Dashboard reload={true} /> } />
-                        <Route path={"/user/:token/account"} element={ <UserDetails /> } />
-                        <Route path={"/user/:token/account/reload"} element={ <UserDetails reload={true} /> } />
+                        <Route path={"/user/:token/account"} element={ <UserDetails userData={userData} /> } />
                         <Route path={"/details/:code/:history"} element={ <CurrencyDetails /> } />
-                        <Route path={"/details/:code/:history/:token"}
-                            element={ <CurrencyDetails themeMode={userData?.themeMode ? userData.themeMode : null} /> }
-                        />
+                        <Route path={"/details/:code/:history/:token"} element={ <CurrencyDetails /> } />
                         <Route path={"/register/:step"} element={ <Register /> } />
                         <Route path={"/login"} element={ <Login /> } />
                         <Route path={"/*"} element={ <Error error="Zabłądziłeś/aś, wróć do strony głównej" /> } />

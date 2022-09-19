@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { getSpread } from '../../helpers/helper';
 
 
-const Card = ({ data }) => {
+const Card = ({ data, animate }) => {
 
     const { currency, balance, invested, spread, cardColor, customCurrencyRate } = data;
     const [currencyData, setCurrencyData] = useState(null);
@@ -33,12 +33,16 @@ const Card = ({ data }) => {
         return ((value * balance) - invested).toFixed(2);
     }
 
+    console.log(animate);
+
     return(
         <CreditCard 
             style={{ 
                 background: cardColor, 
                 boxShadow: `0px 2px 15px 0px ${cardColor}`
-        }}>
+            }}
+            className={animate ? 'animate' : ''}
+        >
             {currencyData ? 
             <div>
                 <h3>Twoje saldo:</h3>
@@ -63,6 +67,25 @@ const CreditCard = styled.div`
     position: relative;
     box-shadow: 0px 2px 15px 0px var(--blue);
     margin-bottom: 40px;
+
+    &.animate{
+        animation: pop .5s ease-in-out;
+    }
+
+    @keyframes pop{
+        0%{
+            transform: scale(1);
+        }
+        50%{
+            transform: scale(0.95);
+        }
+        80%{
+            transform: scale(1.05);
+        }
+        100%{
+            transform: scale(1);
+        }
+    }
 
     &::after{
         content: '';

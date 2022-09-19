@@ -23,6 +23,7 @@ const Dashboard = ({ reload, children }) => {
     const [userData, setUserData] = useContext(UserContext);
     const [activeSubAccount, setActiveSubAccount] = useState(null);
     const [error, setError] = useState(null);
+    const [accountSwitched, setAccountSwitched] = useState(false);
     const [alert, setAlert] = useContext(AlertContext); // eslint-disable-line
 
     const fetchUser = async (token) => {
@@ -36,11 +37,13 @@ const Dashboard = ({ reload, children }) => {
 
     const slideChanged = async (e) => {
         if(e.realIndex !== userData.mainAccount){
+            setAccountSwitched(false);
             swiperRef.current.swiper.allowTouchMove = false;
             userData.mainAccount = e.realIndex;
             const response = await UserService.updateUser(params.token, userData);
             if(response.data === 'updated'){
                 setUserData(userData);
+                setAccountSwitched(true);
                 setAlert(`zmiana konta na: ${userData.subAccounts[userData.mainAccount].currency.code}`);
                 setActiveSubAccount(userData.mainAccount);
             } else {
@@ -81,7 +84,7 @@ const Dashboard = ({ reload, children }) => {
                 >
                     {userData.subAccounts.map((subAccount, index) => 
                         <SwiperSlide key={index}>
-                            <Card data={subAccount} />
+                            <Card data={subAccount} animate={userData.mainAccount === index && accountSwitched ? true : false} />
                         </SwiperSlide>
                     )}
                 </Swiper>

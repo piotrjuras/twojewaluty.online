@@ -101,3 +101,22 @@ export const encrypt = (string) => {
 export const decrypt = (encrypted) => {
     return CryptoJS.AES.decrypt(encrypted, process.env.REACT_APP_ENCRYPT).toString(CryptoJS.enc.Utf8);
 }
+
+export const searchCurrency = (value, list) => {
+    const visibleIndexes = [];
+    list.forEach((listItem, index) => {
+        if(value.length > 0){
+            if(
+                listItem.currency.toLowerCase().search(value.toLowerCase()) !== -1
+                ||
+                listItem.code.toLowerCase().search(value.toLowerCase()) !== -1
+            ){
+                visibleIndexes.push(index);
+            }
+        } else {
+            visibleIndexes.push(index);
+        }
+
+    });
+    return visibleIndexes
+}

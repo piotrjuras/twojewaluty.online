@@ -12,6 +12,7 @@ import { Currencies } from '../../styled/StyledCurrencyOption';
 import { useNavigate } from 'react-router-dom';
 import { formModel } from '../../helpers/formData';
 import { images } from '../../images/images';
+import { searchCurrency } from '../../helpers/helper';
 
 const Currency = ({ step }) => {
 
@@ -22,6 +23,7 @@ const Currency = ({ step }) => {
     const [loading, setLoading] = useState(false);
     const [modal, setModal] = useState(false);
     const [askModal, setAskModal] = useState(false);
+    const [searched, setSearched] = useState([]);
     const [alert, setAlert] = useContext(AlertContext); // eslint-disable-line
 
     const fetchCurrencies = async () => {
@@ -41,7 +43,10 @@ const Currency = ({ step }) => {
     const change = () => {
         setMainCurrency(null);
         fetchCurrencies();
+        setSearched([]);
     }
+
+    const search = (value) => setSearched(searchCurrency(value, currencies));
 
     const handleRegister = async (userToken, email, data) => {
         setLoading(true);
@@ -79,17 +84,20 @@ const Currency = ({ step }) => {
         {modal ? 
                 <Modal closeModal={() => setModal(false)}>
                 <h2>Wybierz walutę</h2>
-                {currencies ? 
+                {currencies ? <>
+                    <FormInput placeholder='Wyszukaj walutę' onChange={(e) => search(e.target.value)} />
                     <Currencies>
                         { currencies.map((currency, index) => 
+                            searched.includes(index) || searched.length === 0 ? 
                             <CurrencyOption
                                 loading={loading}
                                 key={index}
                                 currency={currency} 
                                 handleClick={handlePickedCurrency}
-                            />
+                            /> : null
                         ) }
                     </Currencies>
+                    </>
                     : loading && !mainCurrency ? <Loader /> : null }
                 {mainCurrency ? <>
                     <div>
@@ -107,7 +115,10 @@ const Currency = ({ step }) => {
                 </> : null}
             </Modal>
         : null}
-        <StyledButton XL center onClick={() => setModal(true)}>Dodaj domyślną walutę</StyledButton>
+        <StyledButton XL center onClick={() => {
+            setModal(true);
+            setSearched([]);
+        }}>Dodaj domyślną walutę</StyledButton>
         </InputView>
 
     )

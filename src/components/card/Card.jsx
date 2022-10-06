@@ -33,8 +33,6 @@ const Card = ({ data, animate }) => {
         return ((value * balance) - invested).toFixed(2);
     }
 
-    console.log(animate);
-
     return(
         <CreditCard 
             style={{ 

@@ -10,7 +10,8 @@ import { StyledButton, StyledEdit } from '../../styled/StyledButton';
 import { Currencies } from '../../styled/StyledCurrencyOption';
 import { AlertContext } from '../../Root';
 import { useNavigate } from 'react-router-dom';
-
+import { FormInput } from '../../styled/StyledInput';
+import { searchCurrency } from '../../helpers/helper';
 
 const Favorites = ({ data }) => {
 
@@ -18,6 +19,7 @@ const Favorites = ({ data }) => {
     const [addModal, setAddModal] = useState(false);
     const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [searched, setSearched] = useState([]);
     const [availableCurrencies, setAvailableCurrencies] = useState(null);
     const [editMode, setEditMode] = useState(false);
     const [alert, setAlert] = useContext(AlertContext); // eslint-disable-line
@@ -45,6 +47,8 @@ const Favorites = ({ data }) => {
         setLoading(false);
     }
 
+    const search = (value) => setSearched(searchCurrency(value, availableCurrencies));
+
     const checkifExists = (data, currency) => {
         let exists = true;
         data.favorites.forEach(item => {
@@ -54,7 +58,10 @@ const Favorites = ({ data }) => {
     }
 
     useEffect(() => {
-        if(addModal) fetchCurrencies();
+        if(addModal){
+            fetchCurrencies();
+            setSearched([]);
+        };
     },[addModal])
     
     return(
@@ -83,10 +90,11 @@ const Favorites = ({ data }) => {
                     initCloseModal={success}
                 >
                     <h1>Dodaj nową walutę</h1>
-                    {availableCurrencies ? 
+                    {availableCurrencies ?
                         <Currencies>
+                        <FormInput placeholder='Wyszukaj walutę' onChange={(e) => search(e.target.value)} />
                         {availableCurrencies.map((currency, index) => 
-                            checkifExists(data, currency) ? 
+                            checkifExists(data, currency) && (searched.includes(index) || searched.length === 0) ? 
                                 <CurrencyOption
                                     key={index}
                                     currency={currency} 

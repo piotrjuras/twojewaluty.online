@@ -7,13 +7,14 @@ import { StyledButton } from '../../styled/StyledButton';
 import { Currencies } from '../../styled/StyledCurrencyOption';
 import { FormInput } from '../../styled/StyledInput';
 import { AlertContext } from '../../Root';
-
+import { searchCurrency } from '../../helpers/helper';
 
 const AddSubAccount = ({ userData, handleSuccess }) => {
 
     const [currencies, setCurrencies] = useState(null);
     const [mainCurrency, setMainCurrency] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [searched, setSearched] = useState([]);
     const inputValue = useRef();
     const [alert, setAlert] = useContext(AlertContext); // eslint-disable-line
 
@@ -43,9 +44,12 @@ const AddSubAccount = ({ userData, handleSuccess }) => {
         setCurrencies(null);
     }
 
+    const search = (value) => setSearched(searchCurrency(value, currencies));
+
     const change = () => {
         setMainCurrency(null);
         fetchCurrencies();
+        setSearched([]);
     }
 
     const addNewSubAccount = async () => {
@@ -73,17 +77,19 @@ const AddSubAccount = ({ userData, handleSuccess }) => {
     return(
         <div>
             <h2>Dodaj subkonto</h2>
-            {currencies ? 
+            {currencies ? <>
+                <FormInput placeholder='Wyszukaj walutę' onChange={(e) => search(e.target.value)}/>
                 <Currencies>
                     { currencies.map((currency, index) => 
-                        <CurrencyOption
+                        searched.includes(index) || searched.length === 0 ? <CurrencyOption
                             loading={loading}
                             key={index}
                             currency={currency} 
                             handleClick={handlePickedCurrency}
-                        />
+                        /> : null
                     ) }
                 </Currencies>
+                </>
                 : loading && !mainCurrency ? <Loader /> : null }
             {mainCurrency ? <>
                 <div>

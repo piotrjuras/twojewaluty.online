@@ -5,11 +5,12 @@ import { images } from '../images/images';
 import { StyledButton } from '../styled/StyledButton';
 import { FormInput } from '../styled/StyledInput';
 import { setThemeMode } from '../helpers/helper';
-
+import { Checkbox } from '../components/common/Checkbox';
 
 const Login = () => {
 
     const [token, setToken] = useState(null);
+    const [saveLogin, setSaveLogin] = useState(false);
 
     setThemeMode('light');
 
@@ -20,8 +21,11 @@ const Login = () => {
             <div>
                 <h2>zaloguj się przy pomocy swojego indywidualnego tokena</h2>
                 <FormInput type="text" placeholder="token" onChange={(e) => setToken(e.currentTarget.value)} />
+                <Checkbox name="saveLogin" label="Zapisz moje logowanie" checked={saveLogin} value={(checked) => setSaveLogin(checked)} />
                 <Link to={`/user/${token}`}>
-                    <StyledButton center XL disabled={!token?.length}>Zaloguj się</StyledButton>
+                    <StyledButton center XL disabled={!token?.length} onClick={() => {
+                    if(saveLogin) localStorage.setItem('savedSession', token);
+                }}>Zaloguj się</StyledButton>
                 </Link>
             </div>
         </LoginWrapper>

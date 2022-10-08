@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from '../components/common/Modal';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AskButton, StyledButton } from '../styled/StyledButton';
 import { images } from '../images/images';
 import { setThemeMode } from '../helpers/helper';
@@ -11,8 +11,16 @@ const Hero = () => {
 
     const [modal, setModal] = useState(false);
     const [cookieModal, setCoockieModal] = useState(!sessionStorage.getItem('cookie'));
-    
-    setThemeMode('light');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const session = localStorage.getItem('savedSession');
+        if(session){
+            navigate(`/user/${session}`);
+        } else {
+            setThemeMode('light');
+        }
+    })
 
     return(
         <HeroWrapper>

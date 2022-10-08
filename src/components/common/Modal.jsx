@@ -42,7 +42,7 @@ const StyledModal = styled.section`
     box-shadow: var(--modal-box-shadow);
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
-    padding-bottom: 30px;
+    padding-bottom: 40px;
     z-index: 1;
     overflow: auto;
     max-height: calc(90vh - 70px);

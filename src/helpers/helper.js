@@ -68,20 +68,26 @@ export const generateRandomColor = () => {
 }
 
 export const setThemeMode = (theme) => {
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
     if(theme === null){
         const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
         const switchTheme = () => {
             if (darkThemeMq.matches) {
                 document.documentElement.className = 'dark';
+                metaTheme.setAttribute('media', '(prefers-color-scheme: dark)');
+                metaTheme.setAttribute('content', 'rgb(25, 25, 25)');
             } else {
                 document.documentElement.className = 'light';
+                metaTheme.setAttribute('media', '(prefers-color-scheme: light)');
+                metaTheme.setAttribute('content', 'white');
             }
         }
         darkThemeMq.addEventListener('change', () => switchTheme());
         switchTheme();
     } else {
         document.documentElement.className = theme;
-        
+        metaTheme.setAttribute('media', `(prefers-color-scheme: ${theme})`);
+        metaTheme.setAttribute('content', `${theme === 'light' ? 'white' : 'rgb(25, 25, 25)'}`);
     }
 }
 

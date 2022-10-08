@@ -60,6 +60,7 @@ const UserDetails = () => {
                 <LinkButton center XL onClick={() => setModal('editSubAccounts')}>Edytuj subkonta<StyledArrow/></LinkButton>
                 <LinkButton center XL onClick={() => setModal('settings')}>Ustawienia konta<StyledArrow/></LinkButton>
                 <LinkButton center XL onClick={() => {
+                    localStorage.removeItem('savedSession');
                     navigate('/');
                     window.location.reload();
                     }}>Wyloguj<StyledArrow/></LinkButton>

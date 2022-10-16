@@ -36,10 +36,6 @@ const LoadingSignContainer = styled.div`
 
     animation: appearloading .2s .5s forwards, expand .2s 2s forwards;
 
-    &.disappearloading{
-        animation: disappearloading .2s .5s forwards;
-    }
-
     @keyframes appearloading{
         0%{
             transform: translate(-50%, 0px);

@@ -59,6 +59,7 @@ const Dashboard = ({ reload, children }) => {
     },[params.token, userData]); // eslint-disable-line
 
     useEffect(() => {
+        console.log('dashboard');
         if(reload){
             fetchUser(params.token);
             navigate(`/user/${params.token}/`)

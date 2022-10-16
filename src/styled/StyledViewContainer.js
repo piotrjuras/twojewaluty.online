@@ -8,3 +8,13 @@ export const ViewContainer = styled.div`
     // transform: translate(-50%, -50%);
     overflow: hidden;
 `
+
+export const Flex = styled.div`
+    display: flex;
+
+    ${props => props.alignCenter ? 'align-items: center' : null};
+    ${props => props.justifyCenter ? 'justify-content: center' : null};
+    ${props => props.spaceEvenly ? 'justify-content: space-evenly' : null};
+
+
+`

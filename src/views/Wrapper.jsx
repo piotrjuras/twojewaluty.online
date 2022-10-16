@@ -42,7 +42,6 @@ const Wrapper = ({ children }) => {
     },[pending]); // eslint-disable-line
 
     useEffect(() => {
-        console.log(storeValue);
         if(storeValue.error)
         {
             setAlert(['Ups! coś poszło nie tak', 'error']);

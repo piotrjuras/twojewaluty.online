@@ -14,6 +14,7 @@ import Loader from '../components/Loader';
 
 import "swiper/css";
 import 'swiper/css/pagination';
+import Details from '../components/details/Details';
 
 const Dashboard = ({ reload, children }) => {
 
@@ -59,7 +60,6 @@ const Dashboard = ({ reload, children }) => {
     },[params.token, userData]); // eslint-disable-line
 
     useEffect(() => {
-        console.log('dashboard');
         if(reload){
             fetchUser(params.token);
             navigate(`/user/${params.token}/`)
@@ -89,6 +89,7 @@ const Dashboard = ({ reload, children }) => {
                         </SwiperSlide>
                     )}
                 </Swiper>
+                <Details userData={userData} />
                 <h2>Twoja waluta</h2>
                 <Currency
                     code={userData.subAccounts[activeSubAccount].currency.code}

@@ -123,16 +123,3 @@ export const UserIcon = styled.button`
     line-height: 50px;
     font-size: 20px;
 `
-
-export const DetailsButton = styled.button`
-    box-shadow: var(--link-box-shadow);
-    outline: none;
-    padding: 15px 10px;
-    background: inherit;
-    border: none;
-    margin: 10px;
-    color: var(--black);
-    font-size: 15px;
-    font-weight: bolder;
-    border-radius: 5px;
-`

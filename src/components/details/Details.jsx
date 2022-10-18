@@ -2,18 +2,27 @@ import React, { useState } from 'react';
 import Modal from '../common/Modal';
 import Statistics from './Statistics';
 import History from './History';
-import { DetailsButton, StyledButton } from '../../styled/StyledButton';
+import IconButton from '../common/IconButton';
 import { Flex } from '../../styled/StyledViewContainer';
 
 const Details = ({ userData }) => {
 
     const [modal, setModal] = useState(null);
-
     const currentSubAccount = userData.subAccounts[userData.mainAccount];
 
     return <Flex alignCenter spaceEvenly>
-        <StyledButton primary onClick={() => setModal('statistics')}>Statystyki</StyledButton>
-        <StyledButton primary onClick={() => setModal('history')}>Historia</StyledButton>
+        <IconButton
+            onClick={() => setModal('statistics')}
+            iconName="faChartLine"
+            label="Statystki"
+            iconSize={30}
+        />
+        <IconButton
+            onClick={() => setModal('history')}
+            iconName="faList"
+            label="Historia"
+            iconSize={30}
+        />
         { modal === 'statistics' ? 
             <Modal closeModal={() => setModal(null)} >
                 <Statistics data={userData} />

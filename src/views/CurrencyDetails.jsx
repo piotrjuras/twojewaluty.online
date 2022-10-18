@@ -30,7 +30,7 @@ const CurrencyDetails = ({ reloaded }) => {
         if(params.history === 'month') fetchCurrency(params.code, getTimeInPast('month', 1) ,getTimeInPast('now'));
         if(params.history === 'halfyear') fetchCurrency(params.code, getTimeInPast('month', 6) ,getTimeInPast('now'));
         if(params.history === 'year') fetchCurrency(params.code, getTimeInPast('year', 1) ,getTimeInPast('now'));
-    },[params])
+    },[params.history, params.code])
 
     useEffect(() => {
         const array = [];

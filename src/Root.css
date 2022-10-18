@@ -15,6 +15,7 @@
     --char-wrapper-box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, .3);
     --currency-option-span-color: rgba(0, 0, 0, .5);
     --placeholder-black: rgba(0, 0, 0, .5);
+    --black-loading: rgba(230, 230, 230, 1);
 }
 
 :root.dark{
@@ -33,6 +34,7 @@
     --char-wrapper-box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, .8);
     --currency-option-span-color: rgba(255, 255, 255, .5);
     --placeholder-black: rgba(255, 255, 255, .5);
+    --black-loading: rgba(15, 15, 15, 1);
 }
 
 html{

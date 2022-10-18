@@ -21,7 +21,7 @@ const StyledIconButton = styled.button`
     padding: 15px 30px;
     background: inherit;
     border: none;
-    margin: 10px;
+    margin: 0 4px;
     color: var(--black);
     font-size: 12px;
     border-radius: 20px;

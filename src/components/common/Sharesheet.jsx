@@ -4,15 +4,18 @@ import { StyledButton } from '../../styled/StyledButton';
 import { textToClipboard } from '../../helpers/helper';
 import { AlertContext } from '../../Root';
 import { useParams } from 'react-router-dom';
+import useStore from '../../helpers/store/useStore';
 
 const Sharesheet = () => {
 
     const [alert, setAlert] = useContext(AlertContext); // eslint-disable-line
+    const [store, setStore] = useStore(); // eslint-disable-line
     const params = useParams();
 
     const copy = (value, label) => {
         try{
             textToClipboard(value);
+            setStore('hideModal', true);
             setAlert(`${label} skopiowany do schowka`);
         } catch(error) {
             setAlert(['Ups, coś poszło nie tak :(', 'error']);

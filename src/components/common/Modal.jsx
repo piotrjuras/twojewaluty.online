@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import useStore from '../../helpers/store/useStore';
 import { StyledArrow, StyledButton } from '../../styled/StyledButton';
 
 const Modal = ({ closeModal,
@@ -8,6 +9,7 @@ const Modal = ({ closeModal,
                 children }) => {
 
     const [closeAnim, setCloseAnim] = useState(null);
+    const [store, setStore] = useStore();
 
     const animateCloseModal = () => {
         setCloseAnim('close-animation');
@@ -17,8 +19,11 @@ const Modal = ({ closeModal,
     }
 
     useEffect(() => {
-        if(initCloseModal) animateCloseModal();
-    },[initCloseModal]); // eslint-disable-line
+        if(initCloseModal){
+            animateCloseModal();
+            setStore('hideModal', false);
+        }
+    },[initCloseModal, store.hideModal]); // eslint-disable-line
 
     return(
         <StyledModal className={closeAnim}>

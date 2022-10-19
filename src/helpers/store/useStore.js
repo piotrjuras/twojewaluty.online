@@ -3,7 +3,8 @@ import { StoreContext } from '../../Root';
 
 export const Store = {
     loading: false,
-    error: false
+    error: false,
+    hideModal: false
 }
 
 const useStore = () => {

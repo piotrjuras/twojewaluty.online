@@ -5,11 +5,13 @@ import History from './History';
 import IconButton from '../common/IconButton';
 import { Flex } from '../../styled/StyledViewContainer';
 import Sharesheet from '../common/Sharesheet';
+import useStore from '../../helpers/store/useStore';
 
 const Details = ({ userData }) => {
 
     const [modal, setModal] = useState(null);
     const currentSubAccount = userData.subAccounts[userData.mainAccount];
+    const [store, setStore] = useStore(); // eslint-disable-line
 
     return <Flex alignCenter spaceEvenly>
         <IconButton
@@ -31,7 +33,7 @@ const Details = ({ userData }) => {
             iconSize={30}
         />
         { modal === 'sharesheet' ? 
-            <Modal closeModal={() => setModal(null)} >
+            <Modal closeModal={() => setModal(null)} initCloseModal={store.hideModal} >
                 <Sharesheet />
             </Modal>
         : null }

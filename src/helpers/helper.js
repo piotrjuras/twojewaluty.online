@@ -93,11 +93,11 @@ export const setThemeMode = (theme) => {
 
 export const textToClipboard = (text) => {
     const dummy = document.createElement("textarea");
-    document.body.appendChild(dummy);   
+    document.querySelector('#root').prepend(dummy);
     dummy.value = text;
     dummy.select();
     document.execCommand("copy");
-    document.body.removeChild(dummy);
+    document.querySelector('#root').removeChild(dummy);
 }
 
 export const encrypt = (string) => {

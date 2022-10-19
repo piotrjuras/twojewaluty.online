@@ -1,28 +1,19 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import Modal from '../common/Modal';
 import Statistics from './Statistics';
 import History from './History';
 import IconButton from '../common/IconButton';
-import { AlertContext } from '../../Root';
 import { Flex } from '../../styled/StyledViewContainer';
-import { textToClipboard } from '../../helpers/helper';
+import Sharesheet from '../common/Sharesheet';
 
 const Details = ({ userData }) => {
 
-    const [alert, setAlert] = useContext(AlertContext); // eslint-disable-line
     const [modal, setModal] = useState(null);
     const currentSubAccount = userData.subAccounts[userData.mainAccount];
 
     return <Flex alignCenter spaceEvenly>
         <IconButton
-            onClick={() => {
-                try{
-                    textToClipboard(window.location.href);
-                    setAlert('link skopiowany do schowka');
-                } catch(error) {
-                    setAlert(['Ups, coś poszło nie tak, skopiuj link który Ci podaliśmy', 'error']);
-                }
-            }}
+            onClick={() => setModal('sharesheet')}
             iconName="faShare"
             label="Udostępnij"
             iconSize={30}
@@ -39,6 +30,11 @@ const Details = ({ userData }) => {
             label="Historia"
             iconSize={30}
         />
+        { modal === 'sharesheet' ? 
+            <Modal closeModal={() => setModal(null)} >
+                <Sharesheet />
+            </Modal>
+        : null }
         { modal === 'statistics' ? 
             <Modal closeModal={() => setModal(null)} >
                 <Statistics data={userData} />

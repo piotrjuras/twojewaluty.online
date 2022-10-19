@@ -11,6 +11,7 @@ export const StyledButton = styled.button`
     border: none;
     display: ${props => props.center ? 'flex' : null};
     margin: ${props => props.center ? 'auto' : null};
+    ${props => props.width100 ? 'width: 100%;' : null}
     border-radius: 20px;
     letter-spacing: .6px;
     line-height: 20px;

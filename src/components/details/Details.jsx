@@ -4,7 +4,6 @@ import Statistics from './Statistics';
 import History from './History';
 import IconButton from '../common/IconButton';
 import { Flex } from '../../styled/StyledViewContainer';
-import Sharesheet from '../common/Sharesheet';
 import useStore from '../../helpers/store/useStore';
 
 const Details = ({ userData }) => {
@@ -13,13 +12,7 @@ const Details = ({ userData }) => {
     const currentSubAccount = userData.subAccounts[userData.mainAccount];
     const [store, setStore] = useStore(); // eslint-disable-line
 
-    return <Flex alignCenter spaceEvenly>
-        <IconButton
-            onClick={() => setModal('sharesheet')}
-            iconName="faShare"
-            label="Udostępnij"
-            iconSize={30}
-        />
+    return <Flex alignCenter spaceBetween>
         <IconButton
             onClick={() => setModal('statistics')}
             iconName="faChartLine"
@@ -32,11 +25,6 @@ const Details = ({ userData }) => {
             label="Historia"
             iconSize={30}
         />
-        { modal === 'sharesheet' ? 
-            <Modal closeModal={() => setModal(null)} initCloseModal={store.hideModal} >
-                <Sharesheet />
-            </Modal>
-        : null }
         { modal === 'statistics' ? 
             <Modal closeModal={() => setModal(null)} >
                 <Statistics data={userData} />

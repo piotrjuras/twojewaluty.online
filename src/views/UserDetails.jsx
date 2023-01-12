@@ -9,6 +9,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { UserContext } from '../Root';
 import { StyledScreenContainer } from '../styled/StyledScreenContainer';
 import { LinkButton, StyledArrow } from '../styled/StyledButton';
+import Sharesheet from '../components/common/Sharesheet';
 
 const UserDetails = () => {
 
@@ -58,7 +59,10 @@ const UserDetails = () => {
                     localStorage.removeItem('savedSession');
                     navigate('/');
                     window.location.reload();
-                    }}>Wyloguj<StyledArrow/></LinkButton>
+                    }}>
+                        Wyloguj<StyledArrow/>
+                </LinkButton>
+                <LinkButton center XL onClick={() => setModal('share')}>Udostępnij<StyledArrow/></LinkButton>
             </main>
 
             { modal === 'addSubAccount' ? 
@@ -89,6 +93,14 @@ const UserDetails = () => {
                     setSuccess(false);
                 }} initCloseModal={success} >
                     <Settings userData={userDataCopied} handleSuccess={() => fetchUser(params.token)} />
+                </Modal>
+            : null }
+
+            { modal === 'share' ? 
+                <Modal closeModal={() => {
+                    setModal(null);
+                }}>
+                    <Sharesheet />
                 </Modal>
             : null }
             <p>Kontakt: <br/>admin@twojewaluty.online</p>
